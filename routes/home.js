@@ -13,11 +13,10 @@ router.get("/", (req, res) => {
         User.find({}, (err, users)=>{
             if (err)
                 console.log(err);
-
+            
             res.render("index", {
                 title: "Homepage",
-                articles: articles,
-                users: users
+                articles: articles
             });
         });
     });

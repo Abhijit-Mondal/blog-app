@@ -10,6 +10,3 @@ block content
                 dt.article-title
                     a(href="/articles/" + article._id)= article.title
                 dd.article-body= article.body
-                each user in users
-                    if user._id == article.author
-                        dd.article-author= user.name

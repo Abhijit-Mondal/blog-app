@@ -90,7 +90,6 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
 // Updating an article
 router.post("/edit/:id",
     body("title").notEmpty(),
-    body("author").notEmpty(),
     body("body").notEmpty(),    
     
     (req, res) => {
@@ -114,9 +113,9 @@ router.post("/edit/:id",
         else {
             let article = {};
             article.title = req.body.title;
-            article.author = req.body.author;
+            article.author = req.user._id;
             article.body = req.body.body;
-        
+            
             let query = {_id: req.params.id};
         
             Article.updateOne(query, article, (err) => {
