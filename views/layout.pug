@@ -1,0 +1,52 @@
+doctype doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.css")
+        link(rel="stylesheet", href="/css/styles.css")
+        
+        title #{title}
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+            .container-fluid
+                a.navbar-brand(href='/') BlogPost App
+                button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false')
+                    span.navbar-toggler-icon
+                #navbarSupportedContent.collapse.navbar-collapse
+                    ul.nav.navbar-nav.me-auto.mb-2.mb-lg-0
+                        li.nav-item
+                            a.nav-link.active(aria-current='page' href='/') HomePage
+                        if user
+                            li.nav-item
+                                a.nav-link.active(href='/articles/add') Add Article
+
+                    ul.nav.navbar-nav.navbar-right
+                        if user 
+                            li.nav-item.mr-auto 
+                                a.nav-link.active(href="/users/logout") Logout
+                        else
+                            li.nav-item.mr-auto
+                                a.nav-link.active(href='/users/register') Register
+                            li.nav-item.mr-auto
+                                a.nav-link.active(href='/users/login') Login
+
+        .container 
+
+            != messages('message', locals)
+            
+            if errors 
+                each error, i in errors 
+                    div(class="alert alert-danger") #{error.param} : #{error.msg}
+
+            block content
+            br
+        hr
+        .container
+            footer 
+                h4 &copy; Abhijit Mondal 2021 
+
+        script(src="/bower_components/jquery/dist/jquery.min.js") 
+        script(src="/bower_components/bootstrap/dist/js/bootstrap.js") 
+        script(src="/js/main.js") 
